@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CSS3 Image Projects — Imitation Assignment</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Six CSS3 image projects — replace images in /images and open in browser." />
+</head>
+<body>
+  <header>
+    <nav class="topnav">
+      <a href="#prev" class="prev">◀ Navigate to previous page</a>
+      <span class="lesson-pos">9 of 9</span>
+    </nav>
+    <h1>CSS3 Image Projects — Imitation Assignment</h1>
+    <section class="banner">
+      <h2>Turn it in!</h2>
+      <p>You've learned a lot of CSS3 techniques that can alter HTML elements, including shadows, gradients, and filters. Now it's time to see how well you understand how these techniques work.</p>
+      <p>For this assignment, you will be provided with a collection of images. Change these images using CSS3 properties to reflect the screenshots below. Click the Activity button below to download the source images. Then, click each screenshot for a full-size view of each "project." Without using any image-editing software, take the source images and replicate the projects below using only HTML and CSS. Your versions do not have to be arranged in the layout shown. The focus of the assignment is demonstrating an understanding of modern CSS techniques.</p>
+      <p class="altnote">ALTTEXT: Enter key opens full-screen view with caption; escape key exits full screen.</p>
+      <a class="activity-btn" href="images.zip" download>Activity — Download source images</a>
+    </section>
+  </header>
+
+  <main class="gallery">
+    <!-- Project 1: Sepia poster -->
+    <figure class="project p1">
+      <img src="images/source1.jpg" alt="Enter key opens full-screen view with caption; escape key exits full screen." tabindex="0"/>
+      <figcaption>Sepia Poster — CSS filters and transform</figcaption>
+    </figure>
+
+    <!-- Project 2: Vignette portrait -->
+    <figure class="project p2">
+      <img src="images/source2.jpg" alt="Enter key opens full-screen view with caption; escape key exits full screen." tabindex="0"/>
+      <figcaption>Vignette Portrait — blend and mask</figcaption>
+    </figure>
+
+    <!-- Project 3: Double-exposure-like overlay -->
+    <figure class="project p3">
+      <img src="images/source3.jpg" alt="Enter key opens full-screen view with caption; escape key exits full screen." tabindex="0"/>
+      <figcaption>Double-Exposure — gradients and mix-blend-mode</figcaption>
+    </figure>
+
+    <!-- Project 4: Tilted card with shadow -->
+    <figure class="project p4">
+      <img src="images/source4.jpg" alt="Enter key opens full-screen view with caption; escape key exits full screen." tabindex="0"/>
+      <figcaption>Tilted Card — transform and drop-shadow</figcaption>
+    </figure>
+
+    <!-- Project 5: Circular saturated portrait -->
+    <figure class="project p5">
+      <img src="images/source5.jpg" alt="Enter key opens full-screen view with caption; escape key exits full screen." tabindex="0"/>
+      <figcaption>Circular Crop — mask and saturate</figcaption>
+    </figure>
+
+    <!-- Project 6: Football field composed with tic-tac-toe overlay -->
+    <figure class="project p6">
+      <div class="football" tabindex="0">
+        <img src="images/football_field.jpg" alt="Football field base image" />
+        <img class="overlay" src="images/tic-tac-toe.png" alt="Tic-tac-toe overlay" />
+      </div>
+      <figcaption>Football Field — composite using two source images</figcaption>
+    </figure>
+  </main>
+
+  <!-- Fullscreen modal -->
+  <div id="modal" aria-hidden="true">
+    <button id="close" aria-label="Close (Esc)">×</button>
+    <div id="modal-content"></div>
+    <p id="modal-caption"></p>
+  </div>
+
+  <script>
+    // Simple accessible modal for full-size images (click or Enter to open, Esc to close)
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalCaption = document.getElementById('modal-caption');
+    const closeBtn = document.getElementById('close');
+
+    function openModal(src, caption) {
+      modalContent.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = caption || '';
+      modalContent.appendChild(img);
+      modalCaption.textContent = caption || '';
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden', 'false');
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      modalContent.innerHTML = '';
+    }
+
+    document.querySelectorAll('.project img, .project .football').forEach(el => {
+      el.addEventListener('click', e => {
+        if (el.classList && el.classList.contains('football')) {
+          const base = el.querySelector('img');
+          openModal(base.src, el.parentElement.querySelector('figcaption').textContent);
+        } else {
+          openModal(el.src, el.parentElement.querySelector('figcaption').textContent);
+        }
+      });
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>

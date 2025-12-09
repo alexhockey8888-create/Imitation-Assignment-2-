@@ -1,0 +1,51 @@
+:root{
+  --gap:16px;
+  --bg:#f3f5f7;
+  --card-bg:#fff;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#222}
+header{padding:24px;text-align:center}
+.topnav{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:8px 0}
+.topnav .prev{color:#3366cc;text-decoration:none}
+.topnav .lesson-pos{color:#666;font-size:0.95rem}
+.banner{max-width:1000px;margin:12px auto;background:linear-gradient(180deg,#ffffff 0%, #f7fbff 100%);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.05);text-align:left}
+.banner h2{margin-top:0}
+.banner p{color:#2b2b2b}
+.altnote{font-style:italic;color:#555}
+.activity-btn{display:inline-block;margin-top:12px;padding:10px 14px;background:#0b67ff;color:#fff;border-radius:8px;text-decoration:none}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--gap);padding:24px;max-width:1200px;margin:12px auto}
+.project{background:var(--card-bg);padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;flex-direction:column;align-items:center}
+.project img{width:100%;height:220px;object-fit:cover;border-radius:8px;display:block;cursor:pointer}
+.project figcaption{margin-top:10px;font-size:0.95rem}
+
+/* Project-specific effects */
+.p1 img{filter:sepia(0.6) contrast(1.05) saturate(0.9);transform:scale(1.02) rotate(-0.5deg);transition:transform .25s}
+.p1 img:focus,.p1 img:hover{transform:scale(1.04) rotate(-1deg)}
+
+.p2{position:relative;overflow:hidden}
+.p2 img{filter:grayscale(1) contrast(0.95);}
+.p2::after{content:"";position:absolute;inset:0;border-radius:8px;pointer-events:none;background:radial-gradient(ellipse at center, rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.55) 100%);mix-blend-mode:multiply}
+
+.p3{background:linear-gradient(135deg, #081229 0%, #2b3a67 100%);padding:6px}
+.p3 img{filter:blur(0.5px) contrast(1.1);mix-blend-mode:screen;border-radius:6px}
+.p3:hover img{filter:blur(0) saturate(1.1)}
+
+.p4 img{transform:rotate(-6deg);box-shadow:12px 20px 30px rgba(20,30,60,0.25);border:6px solid rgba(255,255,255,0.6)}
+.p4 img:focus,.p4 img:hover{transform:rotate(-2deg) translateY(-6px)}
+
+.p5 img{width:160px;height:160px;border-radius:50%;object-fit:cover;mask-image:linear-gradient(#000,#000);box-shadow:0 10px 30px rgba(0,0,0,0.18);filter:saturate(1.3) contrast(1.02)}
+.p5{align-items:center}
+
+.p6 .football{position:relative;width:100%;height:220px;border-radius:8px;overflow:hidden}
+.p6 .football img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.p6 .football .overlay{mix-blend-mode:multiply;opacity:0.9;transform:scale(1.2) translateY(-8px);filter:contrast(1.05) hue-rotate(-10deg)}
+
+/* Modal */
+#modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999}
+#modal #modal-content img{max-width:90vw;max-height:80vh;border-radius:6px}
+#modal #close{position:absolute;right:24px;top:24px;background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer}
+#modal p{color:#fff;margin-top:12px}
+
+@media (max-width:520px){.project img{height:160px}.p5 img{width:120px;height:120px}}
